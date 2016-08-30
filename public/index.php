@@ -1,17 +1,21 @@
 <?php
+    // 是否开启 DEBUG 模式
     define('DEBUG', true);
 
-    // ROOT 项目所在目录，__DIR__的上一层
-    define('ROOT', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
+    // 错误处理
+    if(DEBUG) {
+        // 错误报告
+        ini_set('display_errors', true);
+        error_reporting(E_ERROR | E_WARNING);
+    } else {
+        ini_set('display_errors', false);
+    }
+
+    // ROOT 项目所在目录，__DIR__ 的上一层
+    define('ROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 
     // 引入加载的文件
-    require ROOT . DIRECTORY_SEPARATOR . 'system/AutoLoader.php';
-
-    // 引入自定义函数的文件
-    require ROOT . DIRECTORY_SEPARATOR . 'system/Functions.php';
-
-    // 引入路由文件
-    require ROOT . DIRECTORY_SEPARATOR . 'config/routes.php';
+    require ROOT . 'system/AutoLoader.php';
 
     // 执行
     \System\App::run();

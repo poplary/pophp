@@ -7,7 +7,24 @@ use System\Request;
 class Route
 {
     // 路由映射
-    public $maps;
+    public $maps = [];
+
+    /**
+     * 构造函数
+     */
+    public function __construct()
+    {
+
+    }
+
+    /**
+     * 返回路由映射关系
+     * @return array 路由映射关系数组
+     */
+    public function maps()
+    {
+        return $this->maps;
+    }
 
     /**
      * 存入get请求
@@ -17,8 +34,9 @@ class Route
      */
     public function get($segment, $callBack)
     {
-        $this->maps['get'] = [$segment => $callBack];
-        return $this;
+        $segment = str_replace('/', '_', $segment);
+        $this->maps['get'][$segment] = $callBack;
+        return ;
     }
 
     /**
@@ -29,8 +47,9 @@ class Route
      */
     public function post($segment, $callBack)
     {
-        $this->maps['post'] = [$segment => $callBack];
-        return $this;
+        $segment = str_replace('/', '_', $segment);
+        $this->maps['get'][$segment] = $callBack;
+        return ;
     }
 
     /**
@@ -38,13 +57,13 @@ class Route
      * @param  Request $request 请求
      * @return void
      */
-    public static function parse(Request $request)
+    public function parse(Request $request)
     {
         // 列出路由映射关系
-        $maps = $GLOBALS['route']->maps;
+        $maps = Config::get('route.maps');
 
         // 请求字段及请求方法
-        $requestUri = $request->getUri();
+        $requestUri = str_replace('/', '_', $request->getUri());
         $requestMethod = $request->getMethod();
 
         // 找不到映射关系
@@ -72,6 +91,17 @@ class Route
             $object->$method($request);
         }
 
-        return ;
+        return;
+    }
+
+    /**
+     * 静态调用该类的方法
+     * @param  string $name 方法名
+     * @param  array  $args 调用方法的参数
+     * @return mixed        执行方法结果
+     */
+    public static function __callStatic($name, $args)
+    {
+        return call_user_func_array($name, $args);
     }
 }
