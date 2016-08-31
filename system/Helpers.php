@@ -7,15 +7,23 @@ if(! function_exists('dd')) {
      * @param  boolean $end  是否在打印结果后中断程序，默认为true
      * @return void
      */
-    function dd($data, $end=true)
+    function dd($data='', $end=true)
     {
-
         echo '<pre>';
         var_dump($data);
         echo '</pre>';
         if($end === true)
             die();
         return;
+    }
+}
+
+if(! function_exists('errorLog')) {
+    function errorLog($message)
+    {
+        $logPath = logPath(date('Ymd') . '_errors.log');
+        $message = '[' . date('Y-m-d H:i:s') . ']' . $message;
+        error_log($message . PHP_EOL, 3, $logPath);
     }
 }
 
@@ -26,33 +34,13 @@ if(! function_exists('errorHandeler')) {
             return;
         }
 
-        echo '<p>';
+        echo "<p><b>$errno</b> [<span style='color:red'>$errno</span>] $errstr<br />\n";
+        echo "Location($errfile <span>line</span> <b style='color:green'>$errline</b>)</p><br/>\n<br/>\n";
 
-        switch ($errno) {
-            case E_USER_ERROR:
-                echo "<b>ERROR</b> ";
-                break;
+        $message = "$errno[$errno]: $errstr . in $errfile(line: $errline)";
+        errorLog($message);
 
-            case E_USER_WARNING:
-                echo "<b>WARNING</b> ";
-                break;
-
-            case E_USER_NOTICE:
-                echo "<b>NOTICE</b> ";
-                break;
-
-            case E_USER_DEPRECATED:
-                echo "<b>DEPRECATED</b> ";
-                break;
-
-            default:
-                echo "<b>Unknown error type</b> ";
-                break;
-        }
-        echo "[<span style='color:red'>$errno</span>] $errstr<br />\n";
-        echo "Location($errfile <span>line</span> <b style='color:green'>$errline</b>)";
-        echo '<p>';
-        exit(1);
+        exit();
     }
 }
 
@@ -60,33 +48,24 @@ if(! function_exists('errorHandeler')) {
 if(! function_exists('exceptionHandeler')) {
     function exceptionHandeler($exception)
     {
-        // dd($exception);
-        echo '<p>';
-        echo "<span style='color:red'><b>Exception</b></span>: " . $exception->getMessage() . ".<br/>\n";
+
+        echo "<p><span style='color:red'><b>Exceptions[" . $exception->getCode() . "]</b></span>: " . $exception->getMessage() . ".<br/>\n";
         echo "<span style='color:green'><b>Location</b></span>(" . $exception->getFile(). " <span>line</span> <b style='color:green'>" . $exception->getLine() . "</b>)";
         echo "<p><span style='color:gray'>Trace</span></p>";
 
+        $traceMessage = '';
         foreach($exception->getTrace() as $index => $trace) {
             echo "<span style='color:red'>[" . $index . "]</span>
                     <span><b style='color:green'>file:</b></span> " . $trace['file']. "
                     <span><b style='color:green'>line:</b></span> " . $trace['line']. "
                     <span><b style='color:blue'>function:</b></span> " . $trace['class'] . $trace['type'] . $trace['function'] . "<br/>\n";
+            $traceMessage .= "[" . $index . "] File: " . $trace['file'] . "(Line: " . $trace['line'] . "), Function: " . $trace['class'] . $trace['type'] . $trace['function'] . PHP_EOL . " Args: " . PHP_EOL . var_export($trace['args'], true) . PHP_EOL;
         }
-        echo '<p>';
-        exit(1);
-    }
-}
+        echo "</p><br/>\n<br/>\n";
 
-if(! function_exists('redirect')) {
-    /**
-     * 跳转
-     * @param  string  $uri 将要跳转的uri
-     * @return void
-     */
-    function redirect($uri)
-    {
-        $url = url($uri);
-        header('Location:' . $url);
+        $message = "Exceptions[" . $exception->getCode() . "]: " . $exception->getMessage() . " . in " . $exception->getFile() . "(line: " . $exception->getLine() . ")" . PHP_EOL . "Trace:" . PHP_EOL . $traceMessage;
+        errorLog($message);
+        exit();
     }
 }
 
@@ -100,7 +79,32 @@ if(! function_exists('url')) {
     function url($segment='', $parameters=[])
     {
 
-        return \System\Url::getUrl($segment, $parameters);
+        return \System\Url::url($segment, $parameters);
+    }
+}
+
+if(! function_exists('domain')) {
+    /**
+     * 获取域名
+     * @return string 域名
+     */
+    function domain()
+    {
+
+        return \System\Url::domain();
+    }
+}
+
+if(! function_exists('redirect')) {
+    /**
+     * 跳转
+     * @param  string  $uri 将要跳转的uri
+     * @return void
+     */
+    function redirect($uri)
+    {
+        $url = url($uri);
+        header('Location:' . $url);
     }
 }
 
@@ -167,42 +171,84 @@ if(! function_exists('configPath')) {
 if(! function_exists('dataPath')) {
     /**
      * 获取data目录
-     * @param  string $fileName data目录下的文件名
+     * @param  string $segment  data目录下子目录/文件
      * @return string           data目录
      */
-    function dataPath($fileName='')
+    function dataPath($segment='')
     {
 
-        $fileName = ltrim($fileName, '/');
+        $segment = ltrim($segment, '/');
         $dataPath = ROOT . 'data' . DIRECTORY_SEPARATOR;
-        return $dataPath . $fileName;
+        return $dataPath . $segment;
     }
 }
 
 if(! function_exists('sessionPath')) {
     /**
-     * 获取session目录
-     * @return string           session目录
+     * 获取session存储的目录
+     * @return string  session存储的目录
      */
     function sessionPath()
     {
 
-        $sessionPath = dataPath() . 'sessions' . DIRECTORY_SEPARATOR;
+        $sessionPath = dataPath() . 'sessions';
         return $sessionPath;
+    }
+}
+
+if(! function_exists('logPath')) {
+    /**
+     * 获取log存储的目录
+     * @param  string  $segment  日志目录下子目录/文件
+     * @return string            log存储的目录
+     */
+    function logPath($segment='')
+    {
+
+        $logPath = dataPath() . 'logs' . DIRECTORY_SEPARATOR;
+        return $logPath . $segment;
+    }
+}
+
+if(! function_exists('appConfig')) {
+    /**
+     * 获取当前app的配置
+     * @return string  app配置
+     */
+    function appConfig()
+    {
+        $domain = str_replace('.', '_', domain());
+        $appConfig = \System\Config::get('application');
+        return isset($appConfig[$domain])? $appConfig[$domain]: isset($appConfig['default']);
     }
 }
 
 if(! function_exists('appPath')) {
     /**
      * 获取app目录
-     * @param  string $directory app目录下子目录，若分级
+     * @param  string $segment   app目录下子目录/文件
      * @return string            app目录
      */
-    function appPath($directory='')
+    function appPath($segment  ='')
     {
-
-        $appPath = rootPath() . 'app' . DIRECTORY_SEPARATOR;
-        $appPath .= $directory === ''? '': $directory . DIRECTORY_SEPARATOR;
+        $appConfig = appConfig();
+        $appPath = rootPath() . $appConfig['app_path'];
+        $appPath .= $segment   === ''? '': $segment;
         return $appPath;
+    }
+}
+
+if(! function_exists('viewPath')) {
+    /**
+     * 获取view目录
+     * @param  string $segment   view目录下子目录/文件
+     * @return string            view目录
+     */
+    function viewPath($segment='')
+    {
+        $appConfig = appConfig();
+        $viewPath = appPath() . $appConfig['view_path'];
+        $viewPath .= $segment === ''? '': $segment;
+        return $viewPath;
     }
 }

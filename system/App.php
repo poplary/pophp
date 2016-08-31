@@ -1,8 +1,9 @@
 <?php
-
 namespace System;
 
-class App
+use System\Library;
+
+class App extends Core
 {
     /**
      * 运行
@@ -10,6 +11,8 @@ class App
      */
     public static function run()
     {
+        // 初始化libraries
+        Library::load();
 
         // 请求数据
         $request = new Request();
@@ -17,6 +20,6 @@ class App
         // 路由处理
         Route::parse($request);
 
-        return ;
+        return;
     }
 }

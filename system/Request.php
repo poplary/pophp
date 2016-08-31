@@ -1,8 +1,8 @@
 <?php
-
 namespace System;
 
-class Request{
+class Request extends Core
+{
     // 请求URI
     public $uri;
 
@@ -28,7 +28,7 @@ class Request{
      * 获取请求的方法
      * @return string
      */
-    public function getMethod()
+    public static function getMethod()
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
@@ -37,7 +37,7 @@ class Request{
      * 获取请求的资源路径
      * @return string
      */
-    public function getUri()
+    public static function getUri()
     {
         // 拆分REQUEST_URI
         $uri = explode('?', $_SERVER['REQUEST_URI']);
@@ -48,7 +48,7 @@ class Request{
      * 获取请求的资源路径
      * @return string
      */
-    public function all()
+    public static function all()
     {
         return $_REQUEST;
     }

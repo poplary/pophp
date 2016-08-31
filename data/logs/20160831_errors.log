@@ -1,0 +1,147 @@
+[2016-08-31 09:53:41]Exceptions[0]: Call to undefined function App\Controllers\var_dump1() . in /www/pophp/app/Controllers/HomeController.php(line: 20)
+Trace:
+[0] File: /www/pophp/system/Route.php(Line: 90), Function: App\Controllers\HomeController->index
+ Args: array (
+  0 => 
+  System\Request::__set_state(array(
+     'uri' => '/',
+     'method' => 'get',
+     'data' => 
+    array (
+    ),
+  )),
+)[1] File: /www/pophp/system/App.php(Line: 21), Function: System\Route::parse
+ Args: array (
+  0 => 
+  System\Request::__set_state(array(
+     'uri' => '/',
+     'method' => 'get',
+     'data' => 
+    array (
+    ),
+  )),
+)[2] File: /www/pophp/public/index.php(Line: 12), Function: System\App::run
+ Args: array (
+)
+[2016-08-31 09:53:41]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 09:54:06]Exceptions[0]: Call to undefined function App\Controllers\var_dump1() . in /www/pophp/app/Controllers/HomeController.php(line: 20)
+Trace:
+[0] File: /www/pophp/system/Route.php(Line: 90), Function: App\Controllers\HomeController->index
+ Args: 
+array (
+  0 => 
+  System\Request::__set_state(array(
+     'uri' => '/',
+     'method' => 'get',
+     'data' => 
+    array (
+    ),
+  )),
+)[1] File: /www/pophp/system/App.php(Line: 21), Function: System\Route::parse
+ Args: 
+array (
+  0 => 
+  System\Request::__set_state(array(
+     'uri' => '/',
+     'method' => 'get',
+     'data' => 
+    array (
+    ),
+  )),
+)[2] File: /www/pophp/public/index.php(Line: 12), Function: System\App::run
+ Args: 
+array (
+)
+[2016-08-31 09:54:06]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 09:54:30]Exceptions[0]: Call to undefined function App\Controllers\var_dump1() . in /www/pophp/app/Controllers/HomeController.php(line: 20)
+Trace:
+[0] File: /www/pophp/system/Route.php(Line: 90), Function: App\Controllers\HomeController->index
+ Args: 
+array (
+  0 => 
+  System\Request::__set_state(array(
+     'uri' => '/',
+     'method' => 'get',
+     'data' => 
+    array (
+    ),
+  )),
+)
+[1] File: /www/pophp/system/App.php(Line: 21), Function: System\Route::parse
+ Args: 
+array (
+  0 => 
+  System\Request::__set_state(array(
+     'uri' => '/',
+     'method' => 'get',
+     'data' => 
+    array (
+    ),
+  )),
+)
+[2] File: /www/pophp/public/index.php(Line: 12), Function: System\App::run
+ Args: 
+array (
+)
+
+[2016-08-31 09:54:30]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 09:55:26]Exceptions[0]: Call to undefined function App\Controllers\var_dump1() . in /www/pophp/app/Controllers/HomeController.php(line: 20)
+Trace:
+[0] File: /www/pophp/system/Route.php(Line: 90), Function: App\Controllers\HomeController->index
+ Args: 
+array (
+  0 => 
+  System\Request::__set_state(array(
+     'uri' => '/',
+     'method' => 'get',
+     'data' => 
+    array (
+    ),
+  )),
+)
+[1] File: /www/pophp/system/App.php(Line: 21), Function: System\Route::parse
+ Args: 
+array (
+  0 => 
+  System\Request::__set_state(array(
+     'uri' => '/',
+     'method' => 'get',
+     'data' => 
+    array (
+    ),
+  )),
+)
+[2] File: /www/pophp/public/index.php(Line: 12), Function: System\App::run
+ Args: 
+array (
+)
+
+[2016-08-31 09:55:26]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:02:43]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:03:42]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:03:57]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:03:57]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:06:08]: Undefined index: _favicon.jpg . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:06:08]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:06:17]: Undefined index: _test_test.jpg . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:06:17]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:06:25]: Undefined index: _assets_test.jpg . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:06:25]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:34:37]: Undefined index: _css_css.jpg . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:34:37]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:35:00]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:35:02]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:35:02]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:35:03]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 10:35:25]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:13:15]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:20:39]: Undefined index: _css_test.css . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:20:39]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:20:50]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:20:55]: Undefined index: _assets_css_img.css . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:20:55]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:20:59]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:23:09]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:23:16]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:23:24]: Undefined index: _test.txt . in /www/pophp/system/Route.php(line: 73)
+[2016-08-31 11:23:24]: Undefined index: _favicon.ico . in /www/pophp/system/Route.php(line: 73)

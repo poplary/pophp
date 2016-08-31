@@ -1,10 +1,16 @@
 <?php
-
 namespace System;
 
-class Config{
+class Config extends Core
+{
 
-    public function get($key, $default = null)
+    /**
+     * 获取配置
+     * @param  string $key     配置项
+     * @param  mixed  $default 获取不到配置时返回的默认值
+     * @return mixed           获取配置的结果
+     */
+    public static function get($key, $default = null)
     {
         $keyArr = explode('.', $key);
 
@@ -24,16 +30,5 @@ class Config{
         }
 
         return $value;
-    }
-
-    /**
-     * 静态调用该类的方法
-     * @param  string $name 方法名
-     * @param  array  $args 调用方法的参数
-     * @return mixed        执行方法结果
-     */
-    public static function __callStatic($name, $args)
-    {
-        return call_user_func_array($name, $args);
     }
 }

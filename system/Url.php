@@ -2,9 +2,10 @@
 
 namespace System;
 
-class Url{
+class Url extends Core
+{
 
-    public static function getUrl()
+    public static function url()
     {
         $header = 'http';
 
@@ -14,5 +15,11 @@ class Url{
         $url = $header . '://' . $_SERVER['HTTP_HOST'];
 
         return $url;
+    }
+
+    public static function domain()
+    {
+
+        return $_SERVER['HTTP_HOST'];
     }
 }

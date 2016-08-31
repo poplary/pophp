@@ -1,14 +1,17 @@
 <?php
 
-namespace System;
+namespace System\Libraries;
 
-class Session{
+use System\Config;
+
+class Session
+{
 
     /**
      * 初始化session
      * @return void
      */
-    public function init()
+    public static function init()
     {
         // 缓存时间参数为秒，需转为分钟
         $expire = Config::get('session.expire', 7200) / 60;
@@ -24,6 +27,7 @@ class Session{
         // session存储位置
         session_save_path($savePath);
 
+        // 开启session
         session_start();
 
         return;
@@ -43,8 +47,9 @@ class Session{
 
     /**
      * 设置session
-     * @param string $key   session的键
-     * @param mixed  $value session的值
+     * @param  string $key   session的键
+     * @param  string $value session的值
+     * @return mixed  $value 设置session的值
      */
     public function set($key, $value)
     {
@@ -75,17 +80,6 @@ class Session{
     }
 
     /**
-     * 静态调用该类的方法
-     * @param  string $name 方法名
-     * @param  array  $args 调用方法的参数
-     * @return mixed        执行方法结果
-     */
-    public static function __callStatic($name, $args)
-    {
-        return call_user_func_array($name, $args);
-    }
-
-    /**
      * 调用类的值的方法获取session的值
      * @param  string $key   session的键
      * @return mixed  $value 获取session结果
@@ -98,6 +92,7 @@ class Session{
     /**
      * 调用类的值的方法设置session
      * @param  string $key   session的键
+     * @param  string $value session的值
      * @return mixed  $value 设置session的值
      */
     public function __set($key, $value)

@@ -1,5 +1,7 @@
 <?php
 
+use System\Request;
+
 $route = new \System\Route();
 
 $route->get('/', 'App\Controllers\HomeController@index');

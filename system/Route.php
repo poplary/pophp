@@ -1,10 +1,9 @@
 <?php
-
 namespace System;
 
 use System\Request;
 
-class Route
+class Route extends Core
 {
     // 路由映射
     public $maps = [];
@@ -57,7 +56,7 @@ class Route
      * @param  Request $request 请求
      * @return void
      */
-    public function parse(Request $request)
+    public static function parse(Request $request)
     {
         // 列出路由映射关系
         $maps = Config::get('route.maps');
@@ -92,16 +91,5 @@ class Route
         }
 
         return;
-    }
-
-    /**
-     * 静态调用该类的方法
-     * @param  string $name 方法名
-     * @param  array  $args 调用方法的参数
-     * @return mixed        执行方法结果
-     */
-    public static function __callStatic($name, $args)
-    {
-        return call_user_func_array($name, $args);
     }
 }
