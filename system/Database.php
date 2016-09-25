@@ -1,7 +1,7 @@
 <?php
+
 namespace Database;
 
-class DataBase extends Core
+class Database extends Core
 {
-
 }

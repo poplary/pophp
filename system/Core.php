@@ -1,13 +1,13 @@
 <?php
+
 namespace System;
 
-class Core{
-
+class Core
+{
     /**
-     * 构造方法
+     * 构造方法.
      */
     public function __construct()
     {
-
     }
 }

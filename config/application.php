@@ -1,4 +1,5 @@
 <?php
+
 return [
     // application配置，键为域名，.由_替换
     'default' => [

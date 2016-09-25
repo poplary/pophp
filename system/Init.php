@@ -3,19 +3,19 @@
 // 命名空间目录映射
 $namespaceMaps = [
     'System' => 'system/',
-    'App' => 'app/',
+    'App'    => 'app/',
 ];
 
 // config配置目录映射
 $configMaps = [
     'application' => 'application.php',
-    'route' => 'routes.php',
-    'session' => 'session.php',
-    'database' => 'database.php',
+    'route'       => 'routes.php',
+    'session'     => 'session.php',
+    'database'    => 'database.php',
 ];
 
 // 自动加载命名空间
-spl_autoload_register(function ($class) use($namespaceMaps) {
+spl_autoload_register(function ($class) use ($namespaceMaps) {
     // 拆分
     $class = str_replace('\\', '/', $class);
     $classArr = explode('/', $class, 2);
@@ -24,7 +24,7 @@ spl_autoload_register(function ($class) use($namespaceMaps) {
     $prefix = $classArr[0];
 
     // 只加载映射关系的命名空间，其他不做处理
-    if(array_key_exists($prefix, $namespaceMaps) !== true) {
+    if (array_key_exists($prefix, $namespaceMaps) !== true) {
         return;
     }
 
@@ -35,19 +35,19 @@ spl_autoload_register(function ($class) use($namespaceMaps) {
     $fileName = $classArr[1];
 
     // 文件位置
-    $file = $baseDir . str_replace('\\', '/', $fileName) . '.php';
+    $file = $baseDir.str_replace('\\', '/', $fileName).'.php';
 
     // 文件存在即加载
-    if(file_exists($file)) {
+    if (file_exists($file)) {
         require $file;
     }
 });
 
 // 引入自定义函数的文件
-require ROOT . 'system/Helpers.php';
+require ROOT.'system/Helpers.php';
 
 // 错误处理
-if(DEBUG) {
+if (DEBUG) {
     // 错误报告
     ini_set('display_errors', 'On');
     ini_set('display_startup_errors', 'On');
@@ -66,7 +66,7 @@ set_exception_handler('exceptionHandeler');
 $config = [];
 
 // 引入配置文件
-foreach($configMaps as $item => $file) {
+foreach ($configMaps as $item => $file) {
     // 配置参数
     $config[$item] = require configPath($file);
 }
