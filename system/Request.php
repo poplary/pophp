@@ -1,4 +1,5 @@
 <?php
+
 namespace System;
 
 class Request extends Core
@@ -13,7 +14,8 @@ class Request extends Core
     public $data;
 
     /**
-     * 构造函数
+     * 构造函数.
+     *
      * @return Request $this
      */
     public function __construct()
@@ -21,11 +23,13 @@ class Request extends Core
         $this->method = $this->getMethod();
         $this->uri = $this->getUri();
         $this->data = $this->all();
+
         return $this;
     }
 
     /**
-     * 获取请求的方法
+     * 获取请求的方法.
+     *
      * @return string
      */
     public static function getMethod()
@@ -34,18 +38,21 @@ class Request extends Core
     }
 
     /**
-     * 获取请求的资源路径
+     * 获取请求的资源路径.
+     *
      * @return string
      */
     public static function getUri()
     {
         // 拆分REQUEST_URI
         $uri = explode('?', $_SERVER['REQUEST_URI']);
+
         return $uri['0'];
     }
 
     /**
-     * 获取请求的资源路径
+     * 获取请求的资源路径.
+     *
      * @return string
      */
     public static function all()
@@ -55,13 +62,13 @@ class Request extends Core
 
     /**
      * 获取请求项的值
+     *
      * @return mixed
      */
     public function __get($val)
     {
-        if(isset($this->data[$val]))
+        if (isset($this->data[$val])) {
             return $this->data[$val];
-
-        return null;
+        }
     }
 }

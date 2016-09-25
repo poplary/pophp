@@ -1,12 +1,12 @@
 <?php
-namespace System;
 
-use System\Library;
+namespace System;
 
 class App extends Core
 {
     /**
-     * 运行
+     * 运行.
+     *
      * @return void
      */
     public static function run()
@@ -19,7 +19,5 @@ class App extends Core
 
         // 路由处理
         Route::parse($request);
-
-        return;
     }
 }

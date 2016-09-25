@@ -1,10 +1,11 @@
 <?php
+
 namespace System;
 
 class Test
 {
-    function test()
+    public function test()
     {
-        return 'test' . time();
+        return 'test'.time();
     }
 }

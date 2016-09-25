@@ -1,7 +1,6 @@
 <?php
-namespace System;
 
-use System\Request;
+namespace System;
 
 class Route extends Core
 {
@@ -9,15 +8,15 @@ class Route extends Core
     public $maps = [];
 
     /**
-     * 构造函数
+     * 构造函数.
      */
     public function __construct()
     {
-
     }
 
     /**
-     * 返回路由映射关系
+     * 返回路由映射关系.
+     *
      * @return array 路由映射关系数组
      */
     public function maps()
@@ -27,33 +26,37 @@ class Route extends Core
 
     /**
      * 存入get请求
-     * @param  string $segment  uri
-     * @param  mixed  $callBack 执行的方法
-     * @return Route  $this
+     *
+     * @param string $segment  uri
+     * @param mixed  $callBack 执行的方法
+     *
+     * @return Route $this
      */
     public function get($segment, $callBack)
     {
         $segment = str_replace('/', '_', $segment);
         $this->maps['get'][$segment] = $callBack;
-        return ;
     }
 
     /**
      * 存入post请求
-     * @param  string $segment  uri
-     * @param  mixed  $callBack 执行的方法
-     * @return Route  $this
+     *
+     * @param string $segment  uri
+     * @param mixed  $callBack 执行的方法
+     *
+     * @return Route $this
      */
     public function post($segment, $callBack)
     {
         $segment = str_replace('/', '_', $segment);
         $this->maps['get'][$segment] = $callBack;
-        return ;
     }
 
     /**
-     * 处理路由
-     * @param  Request $request 请求
+     * 处理路由.
+     *
+     * @param Request $request 请求
+     *
      * @return void
      */
     public static function parse(Request $request)
@@ -66,17 +69,18 @@ class Route extends Core
         $requestMethod = $request->getMethod();
 
         // 找不到映射关系
-        if(! isset($maps[$requestMethod][$requestUri]))
-            echo '找不到路由' . $requestUri . '(' . $requestMethod . '方法)';
+        if (!isset($maps[$requestMethod][$requestUri])) {
+            echo '找不到路由'.$requestUri.'('.$requestMethod.'方法)';
+        }
 
         // $callBack 为可调用的方法或者字符串
         $callBack = $maps[$requestMethod][$requestUri];
 
-        if(is_callable($callBack)) {
+        if (is_callable($callBack)) {
 
             // 可执行的函数，直接执行
             $callBack($request);
-        } elseif(is_string($callBack)) {
+        } elseif (is_string($callBack)) {
 
             // 字符串，格式为 'controller@method'
             $callBackArr = explode('@', $callBack);
@@ -89,7 +93,5 @@ class Route extends Core
             $object = new $controller();
             $object->$method($request);
         }
-
-        return;
     }
 }
